@@ -6,11 +6,34 @@
 
 ## 🚀 Getting Started
 
+### 💻 Next.js 本地開發 (Node.js)
+
 ```bash
 npm run dev
 ```
 
 開啟 [http://localhost:3000](http://localhost:3000) 即可查看。
+
+### 🎈 Streamlit 本地執行與部署 (Python)
+
+本專案支援將 Next.js 靜態導出，並使用 **Streamlit** 進行託管與部署。
+
+#### 1. 本地執行
+確保已安裝 Python，安裝依賴後執行 `app.py`：
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+#### 2. Streamlit Cloud 部署步驟
+1. 前往 [Streamlit Community Cloud](https://share.streamlit.io/) 並登入。
+2. 點擊 **New app**，選擇您的 GitHub 儲存庫 `Machine-learning` 與 `main` 分支。
+3. 將 **Main file path** 設為 `app.py`。
+4. 點擊 **Deploy** 即可完成線上部署！
+
+> [!NOTE]
+> 當 Next.js 網頁程式碼有更動時，請先執行 `npm run build`，並將生成的 `out/` 資料夾內容複製覆蓋到 `static/` 資料夾，再進行 Git 提交與推送。
 
 ---
 
