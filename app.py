@@ -1,5 +1,11 @@
+import os
+import mimetypes
 import streamlit as st
 import streamlit.components.v1 as components
+
+# 確保 JS 和 CSS 的 MIME 類型正確，避免瀏覽器因 nosniff 安全設定而拒絕執行
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
 
 st.set_page_config(
     page_title="機器學習前十大學習法 互動教學平台",
@@ -26,6 +32,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 嵌入由 Next.js 靜態導出的網頁首頁
-# 在 Streamlit 啟用 enableStaticServing = true 時，static/ 資料夾的檔案會掛載於 /app/static/
-components.iframe(src="/app/static/index.html", height=950, scrolling=True)
+# 取得靜態網頁資料夾的絕對路徑
+root_dir = os.path.dirname(os.path.abspath(__file__))
+build_dir = os.path.join(root_dir, "static")
+
+# 使用 Streamlit 自定義元件服務，這會啟動內建的靜態檔案伺服器並正確設定 MIME 類型
+ml_platform = components.declare_component("ml_platform", path=build_dir)
+
+# 渲染網頁並設定高度
+ml_platform(height=950)
